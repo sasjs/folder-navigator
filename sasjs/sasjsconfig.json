@@ -1,0 +1,36 @@
+{
+  "$schema": "https://cli.sasjs.io/sasjsconfig-schema.json",
+  "macroFolders": ["sasjs/macros"],
+  "serviceConfig": {
+    "serviceFolders": ["sasjs/services/common", "sasjs/services/edit"]
+  },
+  "streamConfig": {
+    "assetPaths": [],
+    "streamWeb": true,
+    "streamWebFolder": "webv",
+    "webSourcePath": "dist",
+    "streamServiceName": "clickme"
+  },
+  "targets": [
+    {
+      "name": "viya",
+      "serverUrl": "https://sas.analytium.co.uk",
+      "serverType": "SASVIYA",
+      "appLoc": "/Public/app/folder-navigator",
+      "deployConfig": {
+        "deployServicePack": true
+      },
+      "contextName": "SAS Job Execution compute context"
+    },
+    {
+      "name": "sas9",
+      "serverType": "SAS9",
+      "appLoc": "/Public/app/folder-navigator",
+      "deployConfig": {
+        "deployScripts": ["sasjs/utils/sas9deploy.sh"]
+      },
+      "serverName": "SASApp",
+      "repositoryName": "Foundation"
+    }
+  ]
+}

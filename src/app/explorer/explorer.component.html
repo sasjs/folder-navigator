@@ -1,0 +1,124 @@
+<div class="explorer-root">
+    <!-- <div class="commands">
+        <div class="actions-wrapper">
+            <div class="current-dir">
+                <clr-icon *ngIf="selectedJob !== null && !editingJob" (click)="selectedJob = null; exitJob()" shape="angle left" size="19" class="pointer"></clr-icon>
+                <p *ngIf="selectedItem === null">Pick an item from explorer</p>
+                <p *ngIf="selectedItem !== null">{{selectedItem.ITEMNAME}}</p>
+            </div>
+
+            <hr />
+
+            <button *ngIf="selectedItem && selectedItem.ITEMTYPE.toLowerCase() !== 'folder' && selectedJob === null" (click)="openJob()" type="button" class="btn btn-link btn-sm">
+                <clr-icon shape="file"></clr-icon>
+                View
+            </button>
+            <button *ngIf="selectedItem?.ITEMTYPE.toLowerCase() === 'folder'" (click)="openFolder()" type="button" class="btn btn-link btn-sm">
+                <clr-icon shape="folder-open"></clr-icon>
+                Open
+            </button>
+            <button *ngIf="selectedJob !== null && !editingJob" (click)="editJob()" type="button" class="btn btn-link btn-sm">
+                <clr-icon shape="note"></clr-icon>
+                Edit
+            </button>
+            <ng-container *ngIf="selectedJob !== null && editingJob">
+                <button (click)="saveEditJob()" type="button" class="btn btn-link btn-sm" [disabled]="saveLoading" [clrLoading]="saveLoading">
+                    <clr-icon shape="floppy"></clr-icon>
+                    Save
+                </button>
+                <button (click)="cancelEditJob()" type="button" class="btn btn-link btn-sm">
+                    <clr-icon shape="ban"></clr-icon>
+                    Close
+                </button>
+            </ng-container>
+        </div>
+    </div> -->
+
+    <div class="explorer">
+        <div class="path-wrapper" [class.locked]="editingJob">
+            <clr-icon *ngIf="getCurrentPath().length > 1" (click)="goBack()" shape="angle left" size="19" class="pointer"></clr-icon>
+            <div *ngFor="let point of getCurrentPath()" (click)="jumpToPoint(point)" class="path-point">{{point === '' ? '/' : point}}</div>
+        </div>
+
+        <div style="width: 100%; text-align: center;">
+            <span *ngIf="treeLoading" class="spinner spinner-md">
+                Loading...
+            </span>
+        </div>
+        
+        <ng-container *ngIf="selectedJob === null">
+            <p *ngIf="!itemsTree" style="text-align: center; margin: 0">Folders will appear here.</p>
+    
+            <div *ngIf="!treeLoading" class="explorer-box">
+                <div *ngFor="let item of itemsTree" (click)="selectItem(item)" [class.selected]="item.ITEMID === selectedItem?.ITEMID" class="item">
+                    <div style="flex: 1;">
+                        <clr-icon [attr.shape]="item.ITEMTYPE.toLowerCase() === 'folder' ? 'folder' : 'file'"></clr-icon>
+                        {{item.ITEMNAME}}
+                    </div>
+
+                    <span style="flex: 1;">{{item.ITEMTYPE}}</span>
+
+                    <clr-dropdown [clrCloseMenuOnItemClick]="false">
+                        <button clrDropdownTrigger aria-label="Dropdown demo button">
+                            <clr-icon shape="ellipsis-vertical"></clr-icon>
+                            <!-- <clr-icon shape="caret down"></clr-icon> -->
+                        </button>
+                        <clr-dropdown-menu style="transform: 0; left: -130px;" *clrIfOpen>
+                            <label class="dropdown-header" aria-hidden="true">Actions</label>
+                            <div *ngIf="selectedItem?.ITEMTYPE.toLowerCase() !== 'folder'" (click)="onOpenJobClick()" class="dropdown-item" clrDropdownItem>
+                                <clr-icon shape="file"></clr-icon>
+                                View
+                            </div>
+                            <div *ngIf="selectedItem?.ITEMTYPE.toLowerCase() == 'folder'" (click)="onOpenFolderClick()" class="dropdown-item" clrDropdownItem>
+                                <clr-icon shape="folder-open"></clr-icon>
+                                Open
+                            </div>
+                        </clr-dropdown-menu>
+                    </clr-dropdown>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectedJob !== null">
+            <div class="job-view-row">
+                <p>{{selectedItem?.ITEMNAME}}</p>
+
+                <div class="buttons">
+                    <button *ngIf="selectedJob !== null && !editingJob" (click)="editJob()" type="button" class="btn btn-link btn-sm">
+                        <clr-icon shape="note"></clr-icon>
+                        Edit
+                    </button>
+
+                    <ng-container *ngIf="selectedJob !== null && editingJob">
+                        <button (click)="saveEditJob()" type="button" class="btn btn-link btn-sm" [disabled]="saveLoading" [clrLoading]="saveLoading">
+                            <clr-icon shape="floppy"></clr-icon>
+                            Save
+                        </button>
+                        <button (click)="cancelEditJob()" type="button" class="btn btn-link btn-sm">
+                            <clr-icon shape="ban"></clr-icon>
+                            Discard
+                        </button>
+                    </ng-container>
+                </div>
+            </div>
+    
+            <div [style.padding]="editingJob ? '0' : ''" class="code-wrapper">
+                <!-- <code *ngIf="!treeLoading && !editingJob" class="code-preview" [innerHTML]="selectedJob"></code> -->
+    
+                <ace [mode]="'markdown'" [theme]="'monkai'" [(value)]="selectedJob" [disabled]="!editingJob"></ace>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<clr-modal [clrModalOpen]="error !== null" [clrModalClosable]="false">
+    <h3 class="modal-title">Error</h3>
+    <div class="modal-body">
+        <p>{{error}}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="error = null">
+            Close
+        </button>
+    </div>
+</clr-modal>

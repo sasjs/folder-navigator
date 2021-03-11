@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.code {
+  font-family: Monaco, Courier, monospace;
+  border: 1px solid #d9d9d9;
+  padding: 5px;
+  border-radius: 3px;
+  background-color: #4a3f3f;
+  color: #f79205;
+}
+
+.menu-divider {
+  margin: 0 10px !important;
+}
+
+.data-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+
+  .areas-select-wrapper {
+      display: flex;
+      align-items: center;
+      
+      ::ng-deep clr-select-container {
+          margin: 0;
+          
+          select {
+              min-width: 200px;
+          }
+      }
+
+      button {
+          margin-left: 10px;
+      }
+  }
+
+  table {
+      width: 80%;
+      margin-top: 40px;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
