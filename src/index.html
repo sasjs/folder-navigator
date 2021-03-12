@@ -6,6 +6,21 @@
     <base href="./">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <script type="text/javascript">
+      const adapterSettings = {
+        serverUrl: 'https://sas.analytium.co.uk',
+        appLoc: '/Public/app/foldernavigator',
+        serverType: 'SASVIYA',
+        debug: false,
+        useComputeApi: true,
+        contextName: 'SAS Job Execution compute context',
+      }
+      localStorage.setItem(
+        'adapterSettings',
+        JSON.stringify(adapterSettings)
+      )
+    </script>
   </head>
   <body class="mat-typography">
     <app-root></app-root>

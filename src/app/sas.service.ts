@@ -10,14 +10,11 @@ export class SasService {
   private _sasService: any;
 
   constructor(private stateService: StateService) {
-    this._sasService = new SASjs({
-      serverUrl: 'https://sas.analytium.co.uk',
-      appLoc: '/Public/app/foldernavigator',
-      serverType: 'SASVIYA',
-      debug: false,
-      useComputeApi: true,
-      contextName: 'SAS Job Execution compute context',
-    });
+    const adapterSettings: string | null = JSON.parse(
+      localStorage.getItem('adapterSettings') || '{}'
+    )
+
+    this._sasService = new SASjs(adapterSettings);
   }
 
   public fetchStartupData() {
