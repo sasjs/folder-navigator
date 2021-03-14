@@ -38,7 +38,14 @@
                 ]
             },
             "serverName": "SASApp",
-            "repositoryName": "Foundation"
+            "repositoryName": "Foundation",
+            "streamConfig": {
+                "assetPaths": [],
+                "streamWeb": true,
+                "streamWebFolder": "web",
+                "webSourcePath": "dist",
+                "streamServiceName": "clickme"
+            }
         }
     ]
 }
