@@ -9,13 +9,6 @@
             "sasjs/services/edit"
         ]
     },
-    "streamConfig": {
-        "assetPaths": [],
-        "streamWeb": true,
-        "streamWebFolder": "web",
-        "webSourcePath": "dist",
-        "streamServiceName": "clickme"
-    },
     "defaultTarget": "viya",
     "targets": [
         {
@@ -26,7 +19,14 @@
             "deployConfig": {
                 "deployServicePack": true
             },
-            "contextName": "SAS Job Execution compute context"
+            "contextName": "SAS Job Execution compute context",
+            "streamConfig": {
+                "assetPaths": [],
+                "streamWeb": true,
+                "streamWebFolder": "web",
+                "webSourcePath": "dist",
+                "streamServiceName": "clickme"
+            }
         },
         {
             "name": "sas9",
