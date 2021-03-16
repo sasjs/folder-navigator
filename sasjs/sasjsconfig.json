@@ -40,7 +40,9 @@
             "serverName": "SASApp",
             "repositoryName": "Foundation",
             "streamConfig": {
-                "assetPaths": [],
+                "assetPaths": [
+                    "./assets"
+                ],
                 "streamWeb": true,
                 "streamWebFolder": "web",
                 "webSourcePath": "dist",
