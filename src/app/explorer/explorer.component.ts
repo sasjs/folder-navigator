@@ -223,12 +223,7 @@ export class ExplorerComponent implements OnInit {
 
     if (!this.itemsTree) return
 
-    let path = this.itemsTree[0].ITEMPATH
-    let tempArr = path.split('/')
-    tempArr.pop()
-    path = tempArr.join('/')
-
-    if (path === '') path = '/'
+    let path = this.popLastRoutePath(this.itemsTree[0].ITEMPATH)
     
     this.onOpenFolderClick(path)
   }
@@ -277,15 +272,49 @@ export class ExplorerComponent implements OnInit {
     let data = { INDATA: [{folderpath: folderPath}] }
 
     this.sasService.request('common/getfoldercontents', data).then((res: any) => {
-      this.itemsTree = res.folders
-      this.selectedItem = null
+      if (res.folders.length > 0) {
+        this.itemsTree = res.folders
+        this.selectedItem = null
+      } else {
+        this.error = `${folderPath} is empty.`
+
+        let path = this.popLastRoutePath(folderPath || '')
+
+        this.router.navigate(
+          [], 
+          {
+            relativeTo: this.route,
+            queryParams: {path: path}
+          });
+      }
 
       this.treeLoading = false
 
       if (callback) callback(true)
     }, (err: any) => {
+      let errString = ''
+
+      if (typeof err === 'object') {
+        try {
+          errString = JSON.stringify(err)
+        } catch(ex) {
+          errString = 'We are unable to provide you error details'
+        }
+      } else {
+        errString = err
+      }
+
       this.treeLoading = false
-      this.error = err
+      this.error = errString
+
+      let path = this.popLastRoutePath(folderPath || '')
+
+      this.router.navigate(
+        [], 
+        {
+          relativeTo: this.route,
+          queryParams: {path: path}
+        });
 
       if (callback) callback(false)
     })
@@ -293,6 +322,19 @@ export class ExplorerComponent implements OnInit {
 
   codelinesToString(codelines: string[]): string {
     return codelines.map((line: any) => line.CODELINE).join('\n')
+  }
+
+  popLastRoutePath(folderPath: string) {
+    if (folderPath === '') return '/'
+
+    let path = folderPath
+    let tempArr = path.split('/')
+    tempArr.pop()
+    path = tempArr.join('/')
+
+    if (path === '') path = '/'
+
+    return path
   }
 }
 
