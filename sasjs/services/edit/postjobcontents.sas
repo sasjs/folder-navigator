@@ -61,7 +61,7 @@ run;
 %macro postcontent();
 %if %mf_getplatform()=SASVIYA %then %do;
   %mv_createjob(
-     path=&folderpath
+    path=&folderpath
     ,name=&jobname
     ,code=inref
     ,replace=YES
@@ -69,11 +69,11 @@ run;
 %end;
 %else %do;
   %mm_updatestpsourcecode(
-     stp=&folderpath/&jobname
+    stp=&folderpath/&jobname
     ,stpcode=inref
   )
 %end;
-%mend;
+%mend postcontent;
 
 %postcontent()
 

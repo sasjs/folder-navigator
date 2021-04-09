@@ -39,7 +39,7 @@ run;
 %macro getcontent();
 %if %mf_getplatform()=SASVIYA %then %do;
   %mv_getjobcode(
-     path=&folderpath
+    path=&folderpath
     ,name=&jobname
     ,outfile=&codepath
   )

@@ -5,4 +5,4 @@ image:
   file: .gitpod.dockerfile
 vscode:
   extensions:
-    - auchenberg.vscode-browser-preview@0.6.7:znPd0J3N3vyCIJGzU1M4uA==
+    - sasjs.sasjs-for-vscode
