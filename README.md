@@ -32,6 +32,8 @@ More details in official @SASjs/adapter documentation: https://sasjs.io/sasjs-ad
 
 If you are running locally you will either need to whitelist `localhost` on the server, or enable CORS as described [here](https://sasjs.io/cors)
 
+Finally, execute `npm run build` to create a production build.
+
 ### Backend Services
 
 Simply configure the target in the `sasjsconfig.json` and run `sasjs cbd -t yourTarget` to compile, build & deploy the backend services to your environment.
