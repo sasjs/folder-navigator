@@ -6,3 +6,4 @@ image:
 vscode:
   extensions:
     - sasjs.sasjs-for-vscode
+    - esbenp.prettier-vscode
