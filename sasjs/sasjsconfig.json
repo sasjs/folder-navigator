@@ -1,8 +1,13 @@
 {
   "$schema": "https://cli.sasjs.io/sasjsconfig-schema.json",
-  "macroFolders": ["sasjs/macros"],
+  "macroFolders": [
+    "sasjs/macros"
+  ],
   "serviceConfig": {
-    "serviceFolders": ["sasjs/services/common", "sasjs/services/edit"]
+    "serviceFolders": [
+      "sasjs/services/common",
+      "sasjs/services/edit"
+    ]
   },
   "defaultTarget": "viya",
   "targets": [
@@ -29,9 +34,11 @@
     {
       "name": "sas9",
       "serverType": "SAS9",
-      "appLoc": "/Public/app/folder-navigator",
+      "appLoc": "/User Folders/&sysuserid/folder-navigator",
       "deployConfig": {
-        "deployScripts": ["sasjs/utils/sas9deploy.sh"]
+        "deployScripts": [
+          "sasjs/utils/sas9deploy.sh"
+        ]
       },
       "buildConfig": {
         "buildOutputFileName": "buildsas9.sas"
@@ -39,7 +46,9 @@
       "serverName": "SASApp",
       "repositoryName": "Foundation",
       "streamConfig": {
-        "assetPaths": ["./assets"],
+        "assetPaths": [
+          "./assets"
+        ],
         "streamWeb": true,
         "streamWebFolder": "web",
         "webSourcePath": "dist",
