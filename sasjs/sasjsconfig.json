@@ -1,56 +1,50 @@
 {
-    "$schema": "https://cli.sasjs.io/sasjsconfig-schema.json",
-    "macroFolders": [
-        "sasjs/macros"
-    ],
-    "serviceConfig": {
-        "serviceFolders": [
-            "sasjs/services/common",
-            "sasjs/services/edit"
-        ]
+  "$schema": "https://cli.sasjs.io/sasjsconfig-schema.json",
+  "macroFolders": ["sasjs/macros"],
+  "serviceConfig": {
+    "serviceFolders": ["sasjs/services/common", "sasjs/services/edit"]
+  },
+  "defaultTarget": "viya",
+  "targets": [
+    {
+      "name": "viya",
+      "serverUrl": "https://sas.analytium.co.uk",
+      "serverType": "SASVIYA",
+      "appLoc": "/Public/app/folder-navigator",
+      "deployConfig": {
+        "deployServicePack": true
+      },
+      "buildConfig": {
+        "buildOutputFileName": "buildviya.sas"
+      },
+      "contextName": "SAS Job Execution compute context",
+      "streamConfig": {
+        "assetPaths": [],
+        "streamWeb": true,
+        "streamWebFolder": "web",
+        "webSourcePath": "dist",
+        "streamServiceName": "clickme"
+      }
     },
-    "defaultTarget": "viya",
-    "targets": [
-        {
-            "name": "viya",
-            "serverUrl": "https://sas.analytium.co.uk",
-            "serverType": "SASVIYA",
-            "appLoc": "/Public/app/folder-navigator",
-            "deployConfig": {
-                "deployServicePack": true
-            },
-            "buildConfig": {
-                "buildOutputFileName": "buildviya.sas"
-            },
-            "contextName": "SAS Job Execution compute context",
-            "streamConfig": {
-                "assetPaths": [],
-                "streamWeb": true,
-                "streamWebFolder": "web",
-                "webSourcePath": "dist",
-                "streamServiceName": "clickme"
-            }
-        },
-        {
-            "name": "sas9",
-            "serverType": "SAS9",
-            "appLoc": "/Public/app/folder-navigator",
-            "deployConfig": {
-                "deployScripts": [
-                    "sasjs/utils/sas9deploy.sh"
-                ]
-            },
-            "serverName": "SASApp",
-            "repositoryName": "Foundation",
-            "streamConfig": {
-                "assetPaths": [
-                    "./assets"
-                ],
-                "streamWeb": true,
-                "streamWebFolder": "web",
-                "webSourcePath": "dist",
-                "streamServiceName": "clickme"
-            }
-        }
-    ]
+    {
+      "name": "sas9",
+      "serverType": "SAS9",
+      "appLoc": "/Public/app/folder-navigator",
+      "deployConfig": {
+        "deployScripts": ["sasjs/utils/sas9deploy.sh"]
+      },
+      "buildConfig": {
+        "buildOutputFileName": "buildsas9.sas"
+      },
+      "serverName": "SASApp",
+      "repositoryName": "Foundation",
+      "streamConfig": {
+        "assetPaths": ["./assets"],
+        "streamWeb": true,
+        "streamWebFolder": "web",
+        "webSourcePath": "dist",
+        "streamServiceName": "clickme"
+      }
+    }
+  ]
 }
