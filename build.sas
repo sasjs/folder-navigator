@@ -8,17 +8,18 @@
 
 **/
 
-filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
-%inc mc;
+%global sysprocessmode;
 
 %macro switch();
-%if %mf_getplatform()=SASMETA %then %do;
-  filename s9 url "https://raw.githubusercontent.com/sasjs/folder-navigator/master/buildsas9.txt";
-  %inc s9;
-%end;
-%else %do;
+%if "&sysprocessmode"="SAS Object Server" or "&sysprocessmode"="SAS Compute Server"
+%then %do;
+  /* Viya */
   filename bv url "https://raw.githubusercontent.com/sasjs/folder-navigator/master/buildviya.txt";
   %inc bv;
+%end;
+%else %do;
+  filename s9 url "https://raw.githubusercontent.com/sasjs/folder-navigator/master/buildsas9.txt";
+  %inc s9;
 %end;
 %mend switch;
 
