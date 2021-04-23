@@ -19,6 +19,9 @@
             "deployConfig": {
                 "deployServicePack": true
             },
+            "buildConfig": {
+                "buildOutputFileName": "buildviya.sas"
+            },
             "contextName": "SAS Job Execution compute context",
             "streamConfig": {
                 "assetPaths": [],
