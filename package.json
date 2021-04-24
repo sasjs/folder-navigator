@@ -36,7 +36,7 @@
     "ngx-ace-wrapper": "^11.0.0",
     "rxjs": "~6.6.3",
     "tslib": "^1.14.1",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.15",
