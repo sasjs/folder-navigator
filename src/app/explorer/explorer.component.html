@@ -45,10 +45,10 @@
                 Loading...
             </span>
         </div>
-        
+
         <ng-container *ngIf="selectedJob === null">
             <p *ngIf="!itemsTree" style="text-align: center; margin: 0">Folders will appear here.</p>
-    
+
             <div *ngIf="!treeLoading" class="explorer-box">
                 <div *ngFor="let item of itemsTree" (click)="selectItem(item)" [class.selected]="item.ITEMID === selectedItem?.ITEMID" class="item">
                     <div style="flex: 1;">
@@ -101,10 +101,10 @@
                     </ng-container>
                 </div>
             </div>
-    
+
             <div [style.padding]="editingJob ? '0' : ''" class="code-wrapper">
                 <!-- <code *ngIf="!treeLoading && !editingJob" class="code-preview" [innerHTML]="selectedJob"></code> -->
-    
+
                 <ace [mode]="'markdown'" [theme]="'monkai'" [(value)]="selectedJob" [disabled]="!editingJob"></ace>
             </div>
         </ng-container>

@@ -8,6 +8,7 @@ import cloneDeep from 'lodash-es/cloneDeep'
 import 'brace';
 import 'brace/mode/markdown';
 import 'brace/theme/monokai';
+import 'brace/ext/searchbox';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -20,7 +21,7 @@ export class ExplorerComponent implements OnInit {
   public selectedItem: DirectoryItem | null = null
   public selectedJob: string | null = null
   public selectedOriginal: string | null = null
-  
+
   public sasjsConfig: SASjsConfig | null = null
 
   public treeLoading: boolean = false
@@ -31,7 +32,7 @@ export class ExplorerComponent implements OnInit {
   public urlQuery: {
     path: string
     jobName: string
-  } | null = null 
+  } | null = null
 
   constructor(
     private sasService: SasService,
@@ -60,7 +61,7 @@ export class ExplorerComponent implements OnInit {
 
     this.stateService.startupData.subscribe((rootDirectory: any) => {
       this.itemsTree = rootDirectory
-      
+
       this.goToUrlDir()
     })
   }
@@ -100,7 +101,7 @@ export class ExplorerComponent implements OnInit {
 
   jumpToPoint(point: string) {
     if (this.editingJob === true) return
-    
+
     let jumpToPath: string = '/'
 
     if (point !== '') {
@@ -108,7 +109,7 @@ export class ExplorerComponent implements OnInit {
       let pathUntilClicked = fullPath.slice(0, fullPath.indexOf(point) + 1)
       jumpToPath = pathUntilClicked.join('/')
     }
-    
+
     this.selectedJob = null
 
     this.onOpenFolderClick(jumpToPath)
@@ -130,7 +131,7 @@ export class ExplorerComponent implements OnInit {
     if (!this.selectedItem) return
 
     this.router.navigate(
-      [], 
+      [],
       {
         relativeTo: this.route,
         queryParams: {jobName: this.selectedItem.ITEMNAME},
@@ -170,12 +171,12 @@ export class ExplorerComponent implements OnInit {
   saveEditJob() {
     this.saveLoading = true
 
-    
+
     if (this.selectedItem === null || this.selectedJob === null) {
       this.saveLoading = false
       return
     }
-    
+
     let folderPath = this.selectedItem.ITEMPATH
     let jobName = this.selectedItem.ITEMNAME
 
@@ -209,7 +210,7 @@ export class ExplorerComponent implements OnInit {
 
   exitJob() {
     if (this.selectedItem === null) return
-    
+
     this.onOpenFolderClick(this.selectedItem.ITEMPATH)
   }
 
@@ -224,7 +225,7 @@ export class ExplorerComponent implements OnInit {
     if (!this.itemsTree) return
 
     let path = this.popLastRoutePath(this.itemsTree[0].ITEMPATH)
-    
+
     this.onOpenFolderClick(path)
   }
 
@@ -232,8 +233,8 @@ export class ExplorerComponent implements OnInit {
     let folderPath: string | null = null
 
     if (this.selectedItem) {
-      folderPath = this.selectedItem.ITEMPATH === '/' ? 
-      this.selectedItem.ITEMPATH + this.selectedItem.ITEMNAME : 
+      folderPath = this.selectedItem.ITEMPATH === '/' ?
+      this.selectedItem.ITEMPATH + this.selectedItem.ITEMNAME :
       this.selectedItem.ITEMPATH + '/' + this.selectedItem.ITEMNAME
     }
 
@@ -244,7 +245,7 @@ export class ExplorerComponent implements OnInit {
     }
 
     this.router.navigate(
-      [], 
+      [],
       {
         relativeTo: this.route,
         queryParams: {path: folderPath}
@@ -257,8 +258,8 @@ export class ExplorerComponent implements OnInit {
     let folderPath: string | null = null
 
     if (this.selectedItem) {
-      folderPath = this.selectedItem.ITEMPATH === '/' ? 
-      this.selectedItem.ITEMPATH + this.selectedItem.ITEMNAME : 
+      folderPath = this.selectedItem.ITEMPATH === '/' ?
+      this.selectedItem.ITEMPATH + this.selectedItem.ITEMNAME :
       this.selectedItem.ITEMPATH + '/' + this.selectedItem.ITEMNAME
     }
 
@@ -281,7 +282,7 @@ export class ExplorerComponent implements OnInit {
         let path = this.popLastRoutePath(folderPath || '')
 
         this.router.navigate(
-          [], 
+          [],
           {
             relativeTo: this.route,
             queryParams: {path: path}
@@ -310,7 +311,7 @@ export class ExplorerComponent implements OnInit {
       let path = this.popLastRoutePath(folderPath || '')
 
       this.router.navigate(
-        [], 
+        [],
         {
           relativeTo: this.route,
           queryParams: {path: path}
