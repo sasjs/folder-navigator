@@ -23,6 +23,7 @@ export class ExplorerComponent implements OnInit {
   public selectedOriginal: string | null = null
 
   public sasjsConfig: SASjsConfig | null = null
+  public selectedJobLink: string | null = null
 
   public treeLoading: boolean = false
   public editingJob: boolean = false
@@ -150,6 +151,8 @@ export class ExplorerComponent implements OnInit {
     let folderPath = this.selectedItem.ITEMPATH
     let jobName = this.selectedItem.ITEMNAME
 
+    this.selectedJobLink = `${this.sasjsConfig?.serverUrl}/${this.sasjsConfig?.serverType === 'SASVIYA' ? 'SASJobExecution' : 'SASStoredProcess'}/?_PROGRAM=${folderPath}/${jobName}`
+
     let data = { INDATA: [{ folderpath: folderPath, jobname: jobName}] }
 
     this.sasService.request('common/getjobcontents', data).then((res: any) => {
@@ -210,6 +213,8 @@ export class ExplorerComponent implements OnInit {
 
   exitJob() {
     if (this.selectedItem === null) return
+
+    this.selectedJobLink = null
 
     this.onOpenFolderClick(this.selectedItem.ITEMPATH)
   }

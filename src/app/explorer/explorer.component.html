@@ -81,7 +81,8 @@
 
         <ng-container *ngIf="selectedJob !== null">
             <div class="job-view-row">
-                <p>{{selectedItem?.ITEMNAME}}</p>
+                <p *ngIf="selectedJobLink === null">{{selectedItem?.ITEMNAME}}</p>
+                <a *ngIf="selectedJobLink !== null" target="_blank" [href]="selectedJobLink">{{selectedItem?.ITEMNAME}}</a>
 
                 <div class="buttons">
                     <button *ngIf="selectedJob !== null && !editingJob" (click)="editJob()" type="button" class="btn btn-link btn-sm">
