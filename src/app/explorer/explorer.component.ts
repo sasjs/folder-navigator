@@ -4,6 +4,7 @@ import { SASjsConfig } from '@sasjs/adapter';
 import { SasService } from '../sas.service';
 import { StateService } from '../state.service';
 import cloneDeep from 'lodash-es/cloneDeep'
+import { getExecutorPath } from '@sasjs/utils/utils/executor'
 
 import 'brace';
 import 'brace/mode/markdown';
@@ -151,7 +152,9 @@ export class ExplorerComponent implements OnInit {
     let folderPath = this.selectedItem.ITEMPATH
     let jobName = this.selectedItem.ITEMNAME
 
-    this.selectedJobLink = `${this.sasjsConfig?.serverUrl}/${this.sasjsConfig?.serverType === 'SASVIYA' ? 'SASJobExecution' : 'SASStoredProcess'}/?_PROGRAM=${folderPath}/${jobName}`
+    const executorPath = getExecutorPath(this.sasjsConfig?.serverType || '')
+
+    this.selectedJobLink = `${executorPath}/?_PROGRAM=${folderPath}/${jobName}`
 
     let data = { INDATA: [{ folderpath: folderPath, jobname: jobName}] }
 
