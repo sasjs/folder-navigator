@@ -15,21 +15,30 @@
       "name": "viya",
       "serverUrl": "https://sas.analytium.co.uk",
       "serverType": "SASVIYA",
+      "allowInsecureRequests": false,
       "appLoc": "/Public/app/folder-navigator",
-      "deployConfig": {
-        "deployServicePack": true
-      },
+      "macroFolders": [],
+      "programFolders": [],
       "buildConfig": {
-        "buildOutputFileName": "buildviya.sas"
+        "buildOutputFileName": "buildviya.sas",
+        "buildResultsFolder": "sasjsresults",
+        "buildOutputFolder": "sasjsbuild",
+        "initProgram": "",
+        "termProgram": "",
+        "macroVars": {}
       },
-      "contextName": "SAS Job Execution compute context",
       "streamConfig": {
         "assetPaths": [],
         "streamWeb": true,
         "streamWebFolder": "web",
         "webSourcePath": "dist",
         "streamServiceName": "clickme"
-      }
+      },
+      "deployConfig": {
+        "deployServicePack": true,
+        "deployScripts": []
+      },
+      "contextName": "SAS Job Execution compute context"
     },
     {
       "name": "sas9",
