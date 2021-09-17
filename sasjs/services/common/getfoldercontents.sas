@@ -35,9 +35,12 @@ run;
 %if %mf_getplatform()=SASVIYA %then %do;
   %mv_getfoldermembers(root=&folderpath,outds=work.folders)
   data folders;
-    length itemtype $32;
+    length itemtype $32 name id $64;
     set folders(rename=(name=itemname id=itemid type=itemtype));
     keep itemname itemid itemtype itempath;
+    itemname=name;
+    itemid=id;
+    itemtype=type;
     if itemtype in ('folder','userRoot') then itemtype='Folder';
     else if cats(contenttype)='folder' then itemtype='Folder';
     else itemtype=cats(contenttype);

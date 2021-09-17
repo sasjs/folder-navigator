@@ -36,7 +36,9 @@
       },
       "deployConfig": {
         "deployServicePack": true,
-        "deployScripts": []
+        "deployScripts": [
+          "sasjs/utils/copyviya.sh"
+        ]
       },
       "contextName": "SAS Job Execution compute context"
     },
@@ -46,6 +48,7 @@
       "appLoc": "/User Folders/&sysuserid/folder-navigator",
       "deployConfig": {
         "deployScripts": [
+          "sasjs/utils/copysas9.sh",
           "sasjs/utils/sas9deploy.sh"
         ]
       },
