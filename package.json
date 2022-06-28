@@ -28,7 +28,7 @@
     "@clr/angular": "^3.1.2",
     "@clr/core": "3.1.15",
     "@clr/icons": "5.1.0",
-    "@clr/ui": "5.1.0",
+    "@clr/ui": "5.5.3",
     "@sasjs/adapter": "^2.10.5",
     "@sasjs/utils": "^2.28.0",
     "@webcomponents/webcomponentsjs": "^2.5.0",
