@@ -27,7 +27,7 @@
     "@angular/router": "~9.0.7",
     "@clr/angular": "^3.1.2",
     "@clr/core": "3.1.15",
-    "@clr/icons": "5.1.0",
+    "@clr/icons": "5.5.3",
     "@clr/ui": "5.1.0",
     "@sasjs/adapter": "^2.10.5",
     "@sasjs/utils": "^2.28.0",
